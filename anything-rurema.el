@@ -24,24 +24,17 @@ Otherwise `url-retrieve-synchronously' is used."
 ;;; Rurema Suggestions
 (defvar anything-rm-sug-lgh-flag 0)
 (defun anything-c-rurema-suggest-fetch (input)
-  "Fetch suggestions for INPUT from XML buffer.
-Return an alist with elements like (data . number_results)."
+  "Fetch suggestions for INPUT from JSON buffer.
+Return an alist with elements like (data)."
   (let ((request (concat anything-c-rurema-suggest-url
                          (url-hexify-string input))))
     (flet ((fetch ()
-             (loop
-                with result-alist = (xml-get-children
-                                     (car (xml-parse-region (point-min) (point-max)))
-                                     'CompleteSuggestion)
-                for i in result-alist
-                for data = (cdr (caadr (assoc 'suggestion i)))
-                for nqueries = (cdr (caadr (assoc 'num_queries i)))
-                for ldata = (length data)
-                do
-                  (when (> ldata anything-rm-sug-lgh-flag)
-                    (setq anything-rm-sug-lgh-flag ldata))
-                collect (cons data nqueries) into cont
-                finally return cont)))
+                  (json-read-from-string
+                   (car (cdr
+                         (split-string
+                          (funcall 'buffer-string)
+                          "\n\n"
+                          ))))))
       (if anything-rurema-suggest-use-curl-p
           (with-temp-buffer
             (call-process "curl" nil t nil request)
