@@ -47,20 +47,7 @@ Return an alist with elements like (data)."
 (defun anything-c-rurema-suggest-set-candidates ()
   "Set candidates with result and number of rurema results found."
   (let ((suggestions (anything-c-rurema-suggest-fetch anything-input)))
-    (setq suggestions (loop for i in suggestions
-                         for interval = (- anything-rm-sug-lgh-flag (length (car i)))
-                         for elm = (concat (car i)
-                                           (make-string (+ 2 interval) ? )
-                                           "(" (cdr i) " results)")
-                         collect (cons elm (car i))))
-    (if (some (lambda (data) (equal (cdr data) anything-input)) suggestions)
-        suggestions
-        ;; if there is no suggestion exactly matching the input then
-        ;; prepend a Search on Rurema item to the list
-        (append
-         suggestions
-         (list (cons (concat "Search for " "'" anything-input "'" " on Rurema")
-                     anything-input))))))
+    (append suggestions nil)))
 
 (defvar anything-c-rurema-suggest-default-browser-function nil
   "*The browse url function you prefer to use with rurema suggest.
