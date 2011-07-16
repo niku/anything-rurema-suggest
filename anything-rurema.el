@@ -5,7 +5,7 @@
   :group 'anything-config)
 
 (defcustom anything-c-rurema-suggest-search-url
-  "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
+  "http://rurema.clear-code.com/query:"
   "URL used for Rurema searching."
   :type 'string
   :group 'anything-config)
