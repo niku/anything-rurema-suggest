@@ -1,5 +1,5 @@
 (defcustom anything-c-rurema-suggest-url
-  "http://google.com/complete/search?output=toolbar&q="
+  "http://rurema.clear-code.com/api:internal/auto-complete/?term="
   "URL used for looking up Rurema suggestions."
   :type 'string
   :group 'anything-config)
