@@ -1,3 +1,7 @@
+(require 'json)
+(require 'anything-config)
+(require 'anything-match-plugin)
+
 (defcustom anything-c-rurema-suggest-url
   "http://rurema.clear-code.com/api:internal/auto-complete/?term="
   "URL used for looking up Rurema suggestions."
@@ -69,3 +73,5 @@ See `anything-browse-url-default-browser-alist'.")
     (volatile)
     (requires-pattern . 1)
     (delayed)))
+
+(provide 'anything-rurima-suggest)
